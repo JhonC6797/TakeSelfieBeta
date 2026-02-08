@@ -1,0 +1,24 @@
+import cv2
+import face_recognition
+
+camera = cv2.VideoCapture(0)
+
+while True:
+    PicIsGood,FaceToDetecte = camera.read()
+    if PicIsGood:
+        cv2.imshow("Press Space to Capture", FaceToDetecte)
+
+        key = cv2.waitKey(1)
+        if key == 32:#אם נלחץ space
+            # מקבל שם לשמירה ופריים לשמירה כתמונה
+            cv2.imwrite("face_to_recognise.jpg",FaceToDetecte)#שומר את הפריים (כתמונה) בתקיה הנוכחית
+            print("התמונה נשמרה בהצלחה")
+            # אפשרות יציאה בלחצן q
+        if key == ord('q'):
+            break
+    else:
+        print("קרתה תקלה בזמן הצילום\שמירה של התמונה")
+
+camera.release()
+cv2.destroyAllWindows()
+
